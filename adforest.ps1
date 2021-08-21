@@ -49,17 +49,21 @@ Install-ADDSForest `
 Import-Module activedirectory
 # Create LFVN OU
 $NewOU = "LFVN"
-$Check = Get-ADOrganizationalUnit -Identity "OU=$NewOU,DC=lottefn,DC=vn" -ErrorAction SilentlyContinue
-if ($?)
+$ConvertToDN = "OU=$NewOU,DC=lottefn,DC=vn"
+#$Check = Get-ADOrganizationalUnit -Identity "OU=$NewOU,DC=lottefn,DC=vn" -ErrorAction SilentlyContinue | Out-Null
+if (Get-ADOrganizationalUnit -Filter {DistinguishedName -eq $ConvertToDN})
 {
     Write-Warning "A $NewOU OU already exist in Active Directory"
 }
-if (!$?)
+Else
 {
 New-ADOrganizationalUnit -Name $NewOU -Path "DC=lottefn,DC=vn"
 }
+#Download CSV Files 
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+wget https://raw.githubusercontent.com/qhoa/adds/master/bulk_users1.csv -OutFile bulk_users1.csv
 #Store the data from ADUsers.csv in the $ADUsers variable
-$ADUsers = Import-csv C:\bulk_users1.csv
+$ADUsers = Import-csv .\bulk_users1.csv
 
 #Loop through each row containing user details in the CSV file 
 foreach ($User in $ADUsers)
