@@ -1,3 +1,5 @@
+function Set-Static-IP
+{
 ### Setting static IP Address and DNS ###
 $IP = "10.10.10.10"
 $MaskBits = 24 # This means subnet mask = 255.255.255.0
@@ -21,7 +23,10 @@ $adapter | New-NetIPAddress `
  -DefaultGateway $Gateway
 # Configure the DNS client server IP addresses
 $adapter | Set-DnsClientServerAddress -ServerAddresses $DNS
+}
 
+function AD-Promote
+{
 ### Promote to ADDSForest ###
 $dsrmPassword = (ConvertTo-SecureString -AsPlainText -Force -String "Pa$$w0rd123")
 # Install ADDS Role
@@ -43,14 +48,16 @@ Install-ADDSForest `
 -SafeModeAdministratorPassword $dsrmPassword ` 
 -Confirm:$false
 -Force:$true
-  
+}
+ 
+function Import-Bulk-Users
+{  
 ### Import data to Active Directory ###
 # Import active directory module for running AD cmdlets
 Import-Module activedirectory
 # Create LFVN OU
 $NewOU = "LFVN"
 $ConvertToDN = "OU=$NewOU,DC=lottefn,DC=vn"
-#$Check = Get-ADOrganizationalUnit -Identity "OU=$NewOU,DC=lottefn,DC=vn" -ErrorAction SilentlyContinue | Out-Null
 if (Get-ADOrganizationalUnit -Filter {DistinguishedName -eq $ConvertToDN})
 {
     Write-Warning "A $NewOU OU already exist in Active Directory"
@@ -120,3 +127,36 @@ foreach ($User in $ADUsers)
             
 	}
 }
+}
+
+function Show-Menu
+{
+    param (
+        [string]$Title = 'AD DS Automation Tools - Author: *VU QUY HOA*'
+    )
+    Clear-Host
+    Write-Host "================ $Title ================"
+    
+    Write-Host "1: Press '1' Setting static IP Address."
+    Write-Host "2: Press '2' Promote AD New Forest."
+    Write-Host "3: Press '3' Import Bulk Users."
+    Write-Host "Q: Press 'Q' to quit."
+}
+
+ do
+ {
+     Show-Menu
+     $selection = Read-Host "Please make a selection"
+     switch ($selection)
+     {
+         '1' {
+             Set-Static-IP
+         } '2' {
+             AD-Promote
+         } '3' {
+             Import-Bulk-Users
+         }
+     }
+     pause
+ }
+ until ($selection -eq 'q')
