@@ -1,0 +1,6 @@
+firstname,middleInitial,lastname,username,email,streetaddress,city,zipcode,state,country,department,password,telephone,jobtitle,company,ou
+User1,MN1,LN1,user1,user1@lottefn.vn,,Ha noi,10000,HN,VN,LFVN,12345a@,84123456,Lotte Finance,LFVN,"OU=LFVN,DC=lottefn,DC=vn"
+User2,MN2,LN2,user2,user2@lottefn.vn,,Ha noi,10000,HN,VN,LFVN,12345a@,84123456,Lotte Finance,LFVN,"OU=LFVN,DC=lottefn,DC=vn"
+User3,MN3,LN3,user3,user3@lottefn.vn,,Ha noi,10000,HN,VN,LFVN,12345a@,84123456,Lotte Finance,LFVN,"OU=LFVN,DC=lottefn,DC=vn"
+User4,MN4,LN4,user4,user4@lottefn.vn,,Ha noi,10000,HN,VN,LFVN,12345a@,84123456,Lotte Finance,LFVN,"OU=LFVN,DC=lottefn,DC=vn"
+User5,MN5,LN5,user5,user5@lottefn.vn,,Ha noi,10000,HN,VN,LFVN,12345a@,84123456,Lotte Finance,LFVN,"OU=LFVN,DC=lottefn,DC=vn"
