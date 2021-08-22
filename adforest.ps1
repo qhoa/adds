@@ -4,7 +4,7 @@ function Set-Static-IP
 $IP = "10.10.10.10"
 $MaskBits = 24 # This means subnet mask = 255.255.255.0
 $Gateway = "10.10.10.2"
-$Dns = "10.10.10.10" # DNS it-self
+$Dns = "127.0.0.1" # DNS it-self
 $IPType = "IPv4"
 # Retrieve the network adapter that you want to configure
 $adapter = Get-NetAdapter | ? {$_.Status -eq "up"}
