@@ -34,6 +34,7 @@ Install-WindowsFeature -Name AD-Domain-Services
 # Add Remote ADDS Tools
 ADD-WindowsFeature RSAT-ADDS-Tools
 # Install ADDS Forest
+#Install-ADDSForest -CreateDnsDelegation:$false -DatabasePath "C:\Windows\NTDS" -DomainMode "WinThreshold" -DomainName "lottefn.vn" -DomainNetbiosName "LOTTEFN" -ForestMode "WinThreshold" -InstallDns:$true -LogPath "C:\Windows\NTDS" -NoRebootOnCompletion:$false -SysvolPath "C:\Windows\SYSVOL" -SafeModeAdministratorPassword $dsrmPassword -Confirm:$false -Force:$true
 Install-ADDSForest `
 -CreateDnsDelegation:$false `
 -DatabasePath "C:\Windows\NTDS" `
@@ -45,8 +46,8 @@ Install-ADDSForest `
 -LogPath "C:\Windows\NTDS" `
 -NoRebootOnCompletion:$false `
 -SysvolPath "C:\Windows\SYSVOL" `
--SafeModeAdministratorPassword $dsrmPassword ` 
--Confirm:$false
+-SafeModeAdministratorPassword $dsrmPassword `
+-Confirm:$false `
 -Force:$true
 }
  
